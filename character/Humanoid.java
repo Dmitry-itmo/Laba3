@@ -20,8 +20,11 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
     public Humanoid(String name, int age, int weight, Gender gender, Race race) {
         super(name,age,weight);
         this.gender = gender;
-        this.race = race; 
+        this.race = race;
+         
     }
+
+    
 
     @Override
     public void toAttack(Character character) {

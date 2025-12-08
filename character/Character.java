@@ -1,7 +1,7 @@
 package character;
 
 public abstract class Character {
-    
+
     private String name;
     private int age;
     private int weight;
@@ -18,9 +18,24 @@ public abstract class Character {
         this.age = age;
         this.weight = weight; 
     }
+
+    public void setCharacteristic(Characteristic characteristic) {
+        this.characteristic = characteristic;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public int getAge() {
+        return age;
+    }
+    public int getWeight() {
+        return weight;
+    }
     public Characteristic getCharacteristic() {
         return characteristic;
     }
+    
     public int getHP() {
         return HP;
     }

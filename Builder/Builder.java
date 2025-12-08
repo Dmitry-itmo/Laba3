@@ -1,8 +1,7 @@
-package Builder;
+package builder;
 
 import enums.*;
 import character.*;
-import character.body.*;
 import item.*;
 
 public interface Builder {
@@ -12,8 +11,8 @@ public interface Builder {
     void setGender(Gender gender);
     void setRace(Race race);
     void setCharacteristic(Characteristic characteristic);
-    void setBody(Body body);
     void setClothes(Clothes clothes);
     void setArmor(Armor armor);
+    void setWeapon(Weapon weapon);
     Humanoid getHumanoid();
 }

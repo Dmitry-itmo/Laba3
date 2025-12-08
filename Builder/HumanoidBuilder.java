@@ -1,7 +1,6 @@
-package Builder;
+package builder;
 
 import character.*;
-import character.body.*;
 import enums.*;
 import item.*;
 
@@ -13,7 +12,6 @@ public class HumanoidBuilder implements Builder{
     private Characteristic characteristic;
     private Gender gender;
     private Race race;
-    private Body body;
     private Clothes clothes;
     private Armor armor;
     private Weapon weapon;
@@ -22,6 +20,7 @@ public class HumanoidBuilder implements Builder{
     public void setName(String name) {
         this.name = name;
     }
+
 
     @Override
     public void setAge(int age) {
@@ -49,25 +48,29 @@ public class HumanoidBuilder implements Builder{
     }
 
     @Override
-    public void setBody(Body body) {
-        this.body = body;
-    }
-
-    @Override
     public void setArmor(Armor armor) {
         this.armor = armor;
     }
+    
 
     @Override
     public void setClothes(Clothes clothes) {
         this.clothes = clothes;
     }
 
+    @Override
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    
+
     public Humanoid getHumanoid() {
         Humanoid humanoid = new Humanoid(name,age,weight,gender,race);
         humanoid.setArmor(armor);
         humanoid.setClothes(clothes);
         humanoid.setWeapon(weapon);
+        humanoid.setCharacteristic(characteristic);
         return humanoid;
     }
 }

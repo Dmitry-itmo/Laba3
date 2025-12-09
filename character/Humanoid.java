@@ -30,7 +30,7 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
         
         // добавить логику износа брони
         try {
-            protection = armor.getProtection();
+            protection = armor.getProtection() * armor.getEndurance() + 1;
             //
         } catch (NullPointerException e) {
             protection = 1;
@@ -42,6 +42,7 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
                 System.out.println(getName() + " бьет кулаками " + character.getName());
                 body.getOrgan(organType).setHP(damage);
                 this.setHP(damage);
+                armor.setEndurance(damage);
             }
         } else {
             damage = (int) ((Math.random()*20 + 1 + character.getCharacteristic().power()) / protection);
@@ -49,6 +50,7 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
                 System.out.println(getName() + " атакует " + character.getName());
                 body.getOrgan(organType).setHP(damage);
                 this.setHP(damage);
+                armor.setEndurance(damage);
             }
         }
 

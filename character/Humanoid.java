@@ -28,8 +28,10 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
         int damage; 
         int protection;
         
+        // добавить логику износа брони
         try {
             protection = armor.getProtection();
+            //
         } catch (NullPointerException e) {
             protection = 1;
         }
@@ -118,11 +120,12 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
         if (toHear(EventManager.getEventManager().getLastSound())) {
             chance += 20;
         }
+
+        // диалог переработать
         chance += clothes.getAesthetics()*10 + getCharacteristic().charisma()*10 + Math.random()*20;
         System.out.println(getName() + " начал разговор с " + character.getName());
         if (chance > 200) {
-            System.out.println("Разговор с " + character.getName() + " проходит отлично");
-            System.out.println(getName() + " удается поднять настроение собеседнику");
+                        System.out.println(getName() + " удается поднять настроение собеседнику");
             character.setMood(Mood.HAPPY);
         } else if ( chance > 150) {
             System.out.println("Разговор с " + character.getName() + " проходит обычно");

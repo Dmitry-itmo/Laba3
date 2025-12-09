@@ -140,6 +140,16 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
         EventManager.getEventManager().setLastSound(talk);
     }
 
+    public void toEat(Food food) {
+        if (food.getFresh() > 0) {
+            setHP(-food.getFresh());
+        } else {
+            setHP(100);
+            setMood(Mood.SAD);
+        }
+
+    }
+
     @Override
     public boolean toSniff(Smell smell) {
         if (Math.random()*100 + body.getOrgan(OrganType.EARS).getHP() > 100) {

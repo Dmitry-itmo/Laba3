@@ -18,4 +18,7 @@ public class Food extends Item{
     public int getFresh() {
         return fresh;
     }
+    public void setFresh(int fresh) {
+        this.fresh = fresh;
+    }
 }

@@ -16,10 +16,9 @@ public abstract class Character {
     private Characteristic characteristic;
 
     {
-        maxHP = (characteristic.physique() + weight)*100;
-        HP = maxHP;
-        speed = characteristic.dexterity()*10 - weight/10;
-    }
+        mood = Mood.NORMAL;
+        status = Status.NORMAL;
+    }    
 
     Character(String name, int age, int weight) {
         this.name = name;
@@ -29,6 +28,9 @@ public abstract class Character {
 
     public void setCharacteristic(Characteristic characteristic) {
         this.characteristic = characteristic;
+        maxHP = (characteristic.physique() + weight)*100;
+        HP = maxHP;
+        speed = characteristic.dexterity()*10 + weight/10;
     }
 
     public void setHP(int damage) {

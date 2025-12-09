@@ -14,6 +14,7 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
     private Weapon weapon;
     private Clothes clothes;
     private Armor armor;
+
     public Humanoid(String name, int age, int weight, Gender gender, Race race) {
         super(name,age,weight);
         this.gender = gender;
@@ -25,16 +26,25 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
     @Override
     public void toAttack(Humanoid character, OrganType organType) {
         int damage; 
+        int protection;
+        
+        try {
+            protection = armor.getProtection();
+        } catch (NullPointerException e) {
+            protection = 1;
+        }
+
         if (weapon == null) {
-            damage = (int) ((Math.random()*20 + 1 + character.getCharacteristic().power()) / armor.getProtection());
-            if (toDodge(character)) {
+            damage = (int) ((Math.random()*20 + 1 + character.getCharacteristic().power()) / protection);
+            if (toDodge(character) == false) {
                 System.out.println(getName() + " бьет кулаками " + character.getName());
                 body.getOrgan(organType).setHP(damage);
                 this.setHP(damage);
             }
         } else {
-            damage = (int) ((Math.random()*20 + 1 + character.getCharacteristic().power() + weapon.getDamage()) / armor.getProtection());
-            if (Math.random()*character.getCharacteristic().dexterity() > 5 && toSee(character)) {
+            damage = (int) ((Math.random()*20 + 1 + character.getCharacteristic().power()) / protection);
+            if (toDodge(character) == false) {
+                System.out.println(getName() + " атакует " + character.getName());
                 body.getOrgan(organType).setHP(damage);
                 this.setHP(damage);
             }
@@ -60,7 +70,7 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
             System.out.println(character.getName() + " увернулся");
             return true;
         } else {
-            System.out.println(character.getName() + " не смогу увернуться");
+            System.out.println(character.getName() + " не смог увернуться");
             return false;
         }
     }
@@ -108,18 +118,18 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
         if (toHear(EventManager.getEventManager().getLastSound())) {
             chance += 20;
         }
-        chance += clothes.getAesthetics() + getCharacteristic().charisma() + Math.random()*20;
+        chance += clothes.getAesthetics()*10 + getCharacteristic().charisma()*10 + Math.random()*20;
         System.out.println(getName() + " начал разговор с " + character.getName());
         if (chance > 200) {
             System.out.println("Разговор с " + character.getName() + " проходит отлично");
-            System.out.println(getName() + "удается поднять настроение собеседнику");
+            System.out.println(getName() + " удается поднять настроение собеседнику");
             character.setMood(Mood.HAPPY);
         } else if ( chance > 150) {
             System.out.println("Разговор с " + character.getName() + " проходит обычно");
             character.setMood(Mood.NORMAL);
         } else {    
             System.out.println("Разговор с " + character.getName() + " проходит не лучшем образом");
-            System.out.println(getName() + "испортил настроение собеседнику");
+            System.out.println(getName() + " испортил настроение собеседнику");
             character.setMood(Mood.SAD);
         }
         Sound talk = new Sound(50,SoundType.TALK);
@@ -141,10 +151,10 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
     @Override
     public boolean toHear(Sound sound) {
         if (Math.random()*100 + body.getOrgan(OrganType.EARS).getHP() > 100) {
-            System.out.println(getName() + "услышал");
+            System.out.println(getName() + " услышал");
             return true;
         } else { 
-            System.out.println(getName() + "не услышал");
+            System.out.println(getName() + " не услышал");
             return false;
         }
     }
@@ -185,7 +195,7 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
         return "Имя персонажа: " + getName() + "\nВозраст: " + getAge() + "\nВес тела " + getWeight();
     }
 
-    
+
 }
 
 

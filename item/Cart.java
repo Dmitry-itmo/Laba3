@@ -11,6 +11,7 @@ public class Cart {
 
     public void roll() {
         if (list.size() > 0)  {
+            System.out.println("Из тележки что-то выпало");
             list.remove((int) Math.random()*list.size());
         }
     }

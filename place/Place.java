@@ -1,6 +1,7 @@
 package place;
 
 import java.util.ArrayList;
+import character.Character;
 
 public class Place {
     private ArrayList<Character> listCharacter = new ArrayList<>();

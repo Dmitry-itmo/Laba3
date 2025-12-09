@@ -5,6 +5,6 @@ import manager.*;
 public interface Interactions {
     boolean toSee(Character character);
     void toSpeak(Character character);
-    void toSniff(Smell smell);
-    void toHear(Sound sound);
+    boolean toSniff(Smell smell);
+    boolean toHear(Sound sound);
 }

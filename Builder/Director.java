@@ -13,8 +13,8 @@ public class Director {
         builder.setGender(Gender.MALE);
         builder.setRace(Race.WITHCER);
         builder.setCharacteristic(new Characteristic(5,5,5,5,5,5));
-        builder.setClothes(new Clothes(40, 1,ClothesType.NORMAL));
-        builder.setArmor(new Armor(50,4,ArmorType.HALF_LATS));
+        builder.setClothes(new Clothes(40, 1,ClothesType.NORMAL,40));
+        builder.setArmor(new Armor(50,4,ArmorType.HALF_LATS,2));
         builder.setWeapon(new ShortRangeWeapon(50,1,100,ShortRangeWeaponType.SWORT));
     }
 
@@ -25,7 +25,7 @@ public class Director {
         builder.setGender(gender);
         builder.setRace(Race.HUMAN);
         builder.setCharacteristic(new Characteristic((int) Math.random()*10,(int) Math.random()*10,(int) Math.random()*10,(int) Math.random()*10,(int) Math.random()*10,(int) Math.random()*10));
-        builder.setClothes(new Clothes(40, 2,ClothesType.NORMAL));
+        builder.setClothes(new Clothes(40, 2,ClothesType.NORMAL,40));
         builder.setArmor(null);
         builder.setWeapon(null);
     }
@@ -37,8 +37,8 @@ public class Director {
         builder.setGender(gender);
         builder.setRace(Race.ELF);
         builder.setCharacteristic(new Characteristic(2,7,5,7,7,8));
-        builder.setClothes(new Clothes(40, 1,ClothesType.DRESS));
-        builder.setArmor(new Armor(100, 2, ArmorType.CHAINMAIL));
+        builder.setClothes(new Clothes(40, 1,ClothesType.DRESS,100));
+        builder.setArmor(new Armor(100, 2, ArmorType.CHAINMAIL,2));
         builder.setWeapon(new LongRangeWeapon(200,1,30,LongRangeWeaponType.BOW));
     }
     

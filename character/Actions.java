@@ -1,12 +1,11 @@
 package character;
 
-import item.*;
+import enums.OrganType;
 
 public interface Actions {
-    void toAttack(Character character);
+    void toAttack(Humanoid character, OrganType organType);
     void toPush(Character character);
-    void toDodge(Character character);
-    Item toBuy(Character character, Item item);
+    boolean toDodge(Character character);
     void toDie();
 
 

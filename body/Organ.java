@@ -1,4 +1,4 @@
-package character.body;
+package body;
 import enums.*;
 
 public class Organ {

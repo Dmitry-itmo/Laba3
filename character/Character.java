@@ -1,17 +1,25 @@
 package character;
 
+import enums.*;
+
 public abstract class Character {
 
     private String name;
     private int age;
     private int weight;
-
+    private Mood mood;
+    private Status status;
 
     private int HP;
     private int maxHP;
     private int speed;
     private Characteristic characteristic;
 
+    {
+        maxHP = (characteristic.physique() + weight)*100;
+        HP = maxHP;
+        speed = characteristic.dexterity()*10 - weight/10;
+    }
 
     Character(String name, int age, int weight) {
         this.name = name;
@@ -21,6 +29,10 @@ public abstract class Character {
 
     public void setCharacteristic(Characteristic characteristic) {
         this.characteristic = characteristic;
+    }
+
+    public void setHP(int damage) {
+        HP -= damage;
     }
 
     public String getName() {
@@ -44,5 +56,21 @@ public abstract class Character {
     }
     public int getSpeed() {
         return speed;
+    }
+    
+    public Status getStatus() {
+        return status;
+    }
+
+    public Mood getMood() {
+        return mood;
+    }
+    
+    public void setMood(Mood mood) {
+        this.mood = mood;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

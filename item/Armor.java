@@ -3,12 +3,13 @@ package item;
 import enums.*;
 
 public class Armor extends Item{
-   int protection;
-   ArmorType type;
+   private int protection;
+   private ArmorType type;
 
-   public Armor(int price, int weight, ArmorType type) {
+   public Armor(int price, int weight, ArmorType type, int protection) {
         super(price,weight);
         this.type = type;
+        this.protection = protection;
    }
    
    public int getProtection() {

@@ -1,6 +1,6 @@
 package manager;
 
-public class EventManager {
+public final class EventManager {
     private Smell lastSmell;
     private Sound lastSound;
     private static EventManager manager;
@@ -12,6 +12,7 @@ public class EventManager {
     public static EventManager getEventManager() {
         if (manager == null) {
             manager = new EventManager();
+            
         }
         return manager;
     }

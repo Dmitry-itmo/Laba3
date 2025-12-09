@@ -1,5 +1,7 @@
 package character;
 
+import java.util.ArrayList;
+
 import body.*;
 import enums.*;
 import item.*;
@@ -14,6 +16,12 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
     private Weapon weapon;
     private Clothes clothes;
     private Armor armor;
+
+    private ArrayList<Character> dialog = new ArrayList<>();
+
+    {
+        dialog.add(this);
+    }
 
     public Humanoid(String name, int age, int weight, Gender gender, Race race) {
         super(name,age,weight);
@@ -42,7 +50,6 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
                 System.out.println(getName() + " бьет кулаками " + character.getName());
                 body.getOrgan(organType).setHP(damage);
                 this.setHP(damage);
-                armor.setEndurance(damage);
             }
         } else {
             damage = (int) ((Math.random()*20 + 1 + character.getCharacteristic().power()) / protection);
@@ -101,45 +108,53 @@ public class Humanoid extends Character implements Actions,Interactions,Movement
 
     @Override
     public void toSpeak(Character character) {
+
         int chance;
-        switch (character.getMood()) {
-            case HAPPY:
-                chance = 100;
-                break;
-            case HATE:
-                chance = 0;
-                break;
-            case ANGRY: 
-                chance = 20;
-            case NORMAL: 
-                chance = 50;
-            case SAD: 
-                chance = 30;
-            default:
-                chance = 40;
-                break;
+        if (character.getTalking() && dialog.contains(character) == false) {
+            setMood(Mood.SAD);
         }
-        if (toHear(EventManager.getEventManager().getLastSound())) {
-            chance += 20;
-        }
+        else {
+            dialog.add(character); 
+            setTalking(true);
+            character.setTalking(true);
 
-        // диалог переработать
-        chance += clothes.getAesthetics()*10 + getCharacteristic().charisma()*10 + Math.random()*20;
-        System.out.println(getName() + " начал разговор с " + character.getName());
-        if (chance > 200) {
-                        System.out.println(getName() + " удается поднять настроение собеседнику");
-            character.setMood(Mood.HAPPY);
-        } else if ( chance > 150) {
-            System.out.println("Разговор с " + character.getName() + " проходит обычно");
-            character.setMood(Mood.NORMAL);
-        } else {    
-            System.out.println("Разговор с " + character.getName() + " проходит не лучшем образом");
-            System.out.println(getName() + " испортил настроение собеседнику");
-            character.setMood(Mood.SAD);
-        }
-        Sound talk = new Sound(50,SoundType.TALK);
+            switch (character.getMood()) {
+                case HAPPY:
+                    chance = 100;
+                    break;
+                case HATE:
+                    chance = 0;
+                    break;
+                case ANGRY: 
+                    chance = 20;
+                case NORMAL: 
+                    chance = 50;
+                case SAD: 
+                    chance = 30;
+                default:
+                    chance = 40;
+                    break;
+            }
+            if (toHear(EventManager.getEventManager().getLastSound())) {
+                chance += 20;
+            }
 
-        EventManager.getEventManager().setLastSound(talk);
+            // диалог переработать
+            chance += clothes.getAesthetics()*10 + getCharacteristic().charisma()*10 + Math.random()*20;
+            
+            if (chance > 200) {
+                character.setMood(Mood.HAPPY);
+            } else if ( chance > 150) {
+                character.setMood(Mood.NORMAL);
+            } else {    
+                character.setMood(Mood.SAD);
+                dialog.remove(character);
+            }
+
+            Sound talk = new Sound(50,SoundType.TALK);
+            
+            EventManager.getEventManager().setLastSound(talk);
+        }
     }
 
     public void toEat(Food food) {

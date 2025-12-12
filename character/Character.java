@@ -10,6 +10,8 @@ public abstract class Character {
     private Mood mood;
     private Status status;
 
+    private boolean isTalking = false;
+
     private int HP;
     private int maxHP;
     private int speed;
@@ -24,6 +26,14 @@ public abstract class Character {
         this.name = name;
         this.age = age;
         this.weight = weight; 
+    }
+
+    public boolean getTalking() {
+        return isTalking;
+    }
+
+    public void setTalking(boolean talking) {
+        isTalking = talking;
     }
 
     public void setCharacteristic(Characteristic characteristic) {
